@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body style="background-color: rgb(180, 180, 180);">
+    <div class="heading text-center m-5">
+        <h2 class="text-dark">BMI Calculator</h2>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div style="box-shadow: 1px 1px 3px rgb(0, 0, 0);" class="col-3 bg-light rounded me-1 p-4">
+            <table>
+                <tr>
+                    <td><label class="m-3" for="">Gender</label></td>
+                    <td>
+                        <input id="male" name="gender" type="radio">
+                        <label class="me-3" for="male">Male</label>
+                        <input id="female" name="gender" type="radio">
+                        <label for="female">Female</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="m-3" for="weight">Weight</label></td>
+                    <td><input placeholder="in kg" class="form-control w-75 mt-4" id="wght" type="text"><br></td>
+                </tr>
+                <tr>
+                    <td><label class="m-3" for="height">Height</label></td>
+                    <td><input placeholder="in m" class="form-control w-75" id="hght" type="text"></td>
+                </tr>
+            </table>
+            <button class="btn btn-success m-3" onclick="calcu()">Calculate</button>
+            <button class="btn btn-info m-3" onclick="clrdisp()">Reset</button>
+        </div>
+        <div style="box-shadow: 1px 1px 3px rgb(0, 0, 0);" class="col-3 bg-light rounded ms-1 p-4">
+            <img class="m-2" width="260px" src="https://www.pnbmetlife.com/content/dam/pnb-metlife/images/icons/bmi-calculator/meter.png" alt=""><br>
+            <h4 class="m-3 text-center" id="result"></h4>
+            <h5 class="m-3 text-center" id="category"></h5>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <script>
+        function clrdisp(){
+            result.innerHTML=""
+            category.innerHTML=""
+            wght.value=""
+            hght.value=""
+            male.checked=false
+            female.checked=false
+        }
+        function calcu(){
+            if(wght.value==""||hght.value==""){
+                alert("Please enter both measurements.")
+            }
+            else{
+                result.value=eval(wght.value/(hght.value**2))
+                result.innerHTML = "BMI: "+ result.value.toFixed(1)
+                if(result.value<18.5){
+                    category.innerHTML = `<p style="color:rgb(1, 168, 223); text-shadow:1px 1px 0.5px grey;">Underweight</p>`
+                }
+                else if(result.value>=18.5 && result.value<=24.9){
+                    category.innerHTML = `<p style="color:rgb(34, 175, 93); text-shadow:1px 1px 0.5px grey;">Normal</p>`
+                }
+                else if(result.value>=25.0 && result.value<=29.9){
+                    category.innerHTML = `<p style="color:gold; text-shadow:1px 1px 0.5px grey;">Overweight</p>`
+                }
+                else if(result.value>=30.0 && result.value<=34.9){
+                    category.innerHTML = `<p style="color:orange; text-shadow:1px 1px 0.5px grey;">Obese</p>`
+                }
+                else{
+                    category.innerHTML = `<p style="color:red; text-shadow:1px 1px 0.5px grey;">Extremely Obese</p>`
+                }
+            }
+        }
+    </script>
+</body>
+</html>
